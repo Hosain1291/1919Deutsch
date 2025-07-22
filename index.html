@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <title>1919, 패망뒤의 탄생</title>
 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     @font-face {
         font-family: 'Danjo-bold-Regular';
@@ -12,42 +14,42 @@
         font-style: normal;
     }
 
-    /* Oldenburg 대신 Danjo-bold-Regular 글로벌 적용 */
+    /* Danjo-bold-Regular 글로벌 적용 */
     body {
-      font-family: 'Danjo-bold-Regular', sans-serif; /* 폰트 변경 및 대체 폰트 지정 */
-      background: #f5f5f5; /* 기본 배경색 (배경 이미지가 로드되지 않을 경우) */
+      font-family: 'Danjo-bold-Regular', sans-serif;
+      background: #f5f5f5;
       margin: 0;
-      padding: 0; /* body의 기본 패딩 제거 */
-      overflow-x: hidden; /* 가로 스크롤 방지 */
+      padding: 0;
+      overflow-x: hidden;
     }
 
     /* 배경 이미지만을 위한 별도의 div */
     .background-image-blur {
-        position: fixed; /* 뷰포트에 고정 */
+        position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
         background-image: url('https://cdn11.bigcommerce.com/s-yzgoj/images/stencil/1280x1280/products/2615030/5570139/apimamqm5__60725.1625602868.jpg'); /* 여기에 배경 이미지 URL을 넣어주세요! */
-        background-size: cover; /* 배경 이미지가 전체를 덮도록 */
-        background-repeat: no-repeat; /* 배경 이미지 반복 없음 */
-        background-position: center center; /* 배경 이미지 중앙 정렬 */
-        background-attachment: fixed; /* 스크롤 시 배경 고정 */
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: fixed;
         filter: blur(15px); /* 흐림 효과 15px (대략 30% 흐림) */
-        -webkit-filter: blur(15px); /* 웹킷 기반 브라우저용 */
-        z-index: -1; /* 다른 콘텐츠 뒤로 보내기 */
+        -webkit-filter: blur(15px);
+        z-index: -1;
     }
 
     /* 모든 UI 콘텐츠를 담을 래퍼 */
     .content-wrapper {
-        position: relative; /* z-index가 작동하도록 설정 */
-        z-index: 1; /* 배경 위에 오도록 설정 */
-        padding: 30px; /* UI 콘텐츠의 패딩 */
+        position: relative;
+        z-index: 1;
+        padding: 30px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 100%; /* 너비는 100%로 유지 */
-        box-sizing: border-box; /* 패딩 포함 */
+        width: 100%;
+        box-sizing: border-box;
     }
 
     h2, h3 {
@@ -85,7 +87,7 @@
 
     /* 입력란 스타일 수정: 배경색과 글자색 및 폰트 적용 */
     .party-card input {
-      font-family: 'Danjo-bold-Regular', sans-serif; /* 폰트 적용 */
+      font-family: 'Danjo-bold-Regular', sans-serif;
       width: 60px;
       text-align: center;
       font-size: 18px;
@@ -93,19 +95,18 @@
       border-radius: 4px;
       border: none;
       padding: 4px;
-      /* background-color는 인라인 스타일로 정당 색상을 따르도록 함 */
-      color: rgba(255, 255, 255, 0.75); /* ✅ 글자색 흰색에 투명도 75% */
-      transition: color 0.2s ease-in-out; /* 부드러운 전환 효과 */
+      color: rgba(255, 255, 255, 0.75);
+      transition: color 0.2s ease-in-out;
     }
 
     /* 입력란에 포커스될 때 글자 투명도 제거 */
     .party-card input:focus {
-        color: white; /* 포커스 시 글자색 흰색 (투명도 없음) */
-        outline: none; /* 기본 포커스 아웃라인 제거 (선택 사항) */
+        color: white;
+        outline: none;
     }
 
     .calculate-button {
-      font-family: 'Danjo-bold-Regular', sans-serif; /* 폰트 적용 */
+      font-family: 'Danjo-bold-Regular', sans-serif;
       display: block;
       margin: 0 auto 30px;
       padding: 14px 40px;
@@ -264,9 +265,9 @@
         justify-content: center;
     }
 
-    /* 드롭다운에도 단조 폰트 적용 */
+    /* 드롭다운에도 Danjo 폰트 적용 */
     .constituency-select-container select {
-        font-family: 'Danjo-bold-Regular', sans-serif; /* 폰트 적용 */
+        font-family: 'Danjo-bold-Regular', sans-serif;
         width: 80%;
         max-width: 400px;
         padding: 8px 12px;
@@ -274,7 +275,7 @@
         border: 1px solid #ccc;
         border-radius: 5px;
         appearance: none;
-        background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23000000%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13.2-6.5H18.6c-5%200-9.3%201.8-12.9%205.5-3.8%203.7-5.7%208-5.7%2012.9v120.9c0%204.9%201.9%209.2%205.7%2012.9%203.6%203.7%207.9%205.5%2012.9%205.5h255.2c5%200%209.3-1.8%2012.9-5.5%203.8-3.7%205.7-8%205.7-12.9V82.3c0-4.9-1.9-9.2-5.7-12.9z%22%2F%3E%3C%2Fsvg%3E');
+        background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23000000%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13.2-6.5H18.6c-5%200-9.3%201.8-12.9%205.5-3.8%203.7-5.7%208-5.7%2012.9v120.9c0%204.9%201.9%209.2%205.7%2012.9%203.6%203.7%207.9%205.5%2012.9%205.5h255.2c5%200%209.3-1.8%2012.9-5.5%203.8-3.7%205.7-8%205.7-12.9z%22%2F%3E%3C%2Fsvg%3E');
         background-repeat: no-repeat;
         background-position: right 8px center;
         background-size: 12px;
@@ -298,6 +299,39 @@
     }
     .constituency-detail ul li .dot {
         vertical-align: middle;
+    }
+
+    /* ✅ 모바일용 미디어 쿼리 (필요시 추가적인 모바일 최적화 스타일 여기에 추가) */
+    @media (max-width: 768px) {
+        .content-wrapper {
+            padding: 15px; /* 모바일에서 패딩 줄이기 */
+        }
+        .party-card {
+            width: 100px; /* 모바일에서 카드 크기 줄이기 */
+            height: 100px;
+            font-size: 0.9em;
+        }
+        .party-card input {
+            width: 50px; /* 입력란 크기 줄이기 */
+            font-size: 16px;
+        }
+        .calculate-button {
+            padding: 10px 20px; /* 버튼 패딩 줄이기 */
+            font-size: 14px;
+        }
+        .projection-party-card {
+            width: 120px; /* 의석 카드 크기 줄이기 */
+            height: 100px;
+        }
+        .projection-seats {
+            font-size: 2em; /* 의석수 글꼴 줄이기 */
+        }
+        table {
+            font-size: 12px; /* 테이블 글꼴 줄이기 */
+        }
+        th, td {
+            padding: 4px 6px;
+        }
     }
   </style>
 </head>
@@ -331,9 +365,10 @@
         자세한 분석을 보려면 선거구를 선택하세요.
       </div>
     </div>
-  </div> 
+  </div>
   <script>
-    const TOTAL_SEATS = 423;
+    const TOTAL_SEATS = 423; // 바이마르 총 의석수 (기존 값 유지)
+    const ELECTORAL_THRESHOLD = 0; // 바이마르에는 일반적으로 전국 봉쇄 조항 없음 (기존 값 유지)
 
     const parties = [
       { id: "spd", name: "SPD", color: "#E00000", vote: 30, regionOnly: null },
@@ -486,11 +521,20 @@ const districts = [
 
     function allocateSeats(partyPercents, seats) {
       let scores = [];
-      for (let [id, percent] of Object.entries(partyPercents)) {
-        for (let i = 0; i < seats; i++) {
-          scores.push({ id, score: percent / (2 * i + 1) });
-        }
-      }
+      // 봉쇄 조항이 0%이므로 모든 정당이 참여 (바이마르 기본 설정)
+      let totalQualifiedPercent = 0;
+      Object.keys(partyPercents).forEach(pid => {
+          totalQualifiedPercent += partyPercents[pid];
+      });
+
+      Object.keys(partyPercents).forEach(pid => {
+          const recalculatedPercent = totalQualifiedPercent > 0 ? (partyPercents[pid] / totalQualifiedPercent) * 100 : 0;
+          
+          for (let i = 0; i < seats; i++) {
+            scores.push({ id: pid, score: recalculatedPercent / (2 * i + 1) });
+          }
+      });
+      
       scores.sort((a, b) => b.score - a.score);
       let result = {};
       scores.slice(0, seats).forEach(s => {
@@ -589,6 +633,7 @@ const districts = [
       districtResults.appendChild(table);
 
       const totalCalculatedSeats = Object.values(nationalSeats).reduce((sum, seats) => sum + seats, 0);
+      console.log("시뮬레이터에서 계산된 총 의석수:", totalCalculatedSeats);
 
       const sortedParties = Object.keys(nationalSeats).map(id => {
           const nationalPercentage = (partyNationalVotes[id] / nationalTotalVotes) * 100;
