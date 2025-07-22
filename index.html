@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>1919, 패망뒤의 탄생</title>
+
+  <style>
+    @font-face {
+        font-family: 'Danjo-bold-Regular';
+        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Danjo-bold-Regular.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    /* Oldenburg 대신 Danjo-bold-Regular 글로벌 적용 */
+    body {
+      font-family: 'Danjo-bold-Regular', sans-serif; /* 폰트 변경 및 대체 폰트 지정 */
+      background: #f5f5f5; /* 기본 배경색 (배경 이미지가 로드되지 않을 경우) */
+      margin: 0;
+      padding: 0; /* body의 기본 패딩 제거 */
+      overflow-x: hidden; /* 가로 스크롤 방지 */
+    }
+
+    /* 배경 이미지만을 위한 별도의 div */
+    .background-image-blur {
+        position: fixed; /* 뷰포트에 고정 */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('https://cdn11.bigcommerce.com/s-yzgoj/images/stencil/1280x1280/products/2615030/5570139/apimamqm5__60725.1625602868.jpg'); /* 여기에 배경 이미지 URL을 넣어주세요! */
+        background-size: cover; /* 배경 이미지가 전체를 덮도록 */
+        background-repeat: no-repeat; /* 배경 이미지 반복 없음 */
+        background-position: center center; /* 배경 이미지 중앙 정렬 */
+        background-attachment: fixed; /* 스크롤 시 배경 고정 */
+        filter: blur(15px); /* 흐림 효과 15px (대략 30% 흐림) */
+        -webkit-filter: blur(15px); /* 웹킷 기반 브라우저용 */
+        z-index: -1; /* 다른 콘텐츠 뒤로 보내기 */
+    }
+
+    /* 모든 UI 콘텐츠를 담을 래퍼 */
+    .content-wrapper {
+        position: relative; /* z-index가 작동하도록 설정 */
+        z-index: 1; /* 배경 위에 오도록 설정 */
+        padding: 30px; /* UI 콘텐츠의 패딩 */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%; /* 너비는 100%로 유지 */
+        box-sizing: border-box; /* 패딩 포함 */
+    }
+
+    h2, h3 {
+      text-align: center;
+      margin-bottom: 20px;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .party-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin-bottom: 30px;
+      width: 100%;
+      max-width: 900px;
+      box-sizing: border-box;
+      padding: 0 15px;
+    }
+
+    .party-card {
+      width: 130px;
+      height: 130px;
+      border-radius: 12px;
+      background: #333;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    /* 입력란 스타일 수정: 배경색과 글자색 및 폰트 적용 */
+    .party-card input {
+      font-family: 'Danjo-bold-Regular', sans-serif; /* 폰트 적용 */
+      width: 60px;
+      text-align: center;
+      font-size: 18px;
+      margin: 6px 0;
+      border-radius: 4px;
+      border: none;
+      padding: 4px;
+      /* background-color는 인라인 스타일로 정당 색상을 따르도록 함 */
+      color: rgba(255, 255, 255, 0.75); /* ✅ 글자색 흰색에 투명도 75% */
+      transition: color 0.2s ease-in-out; /* 부드러운 전환 효과 */
+    }
+
+    /* 입력란에 포커스될 때 글자 투명도 제거 */
+    .party-card input:focus {
+        color: white; /* 포커스 시 글자색 흰색 (투명도 없음) */
+        outline: none; /* 기본 포커스 아웃라인 제거 (선택 사항) */
+    }
+
+    .calculate-button {
+      font-family: 'Danjo-bold-Regular', sans-serif; /* 폰트 적용 */
+      display: block;
+      margin: 0 auto 30px;
+      padding: 14px 40px;
+      font-size: 16px;
+      font-weight: bold;
+      background: #004c47;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      width: 100%;
+      max-width: 900px;
+      box-sizing: border-box;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      margin-bottom: 30px;
+      font-size: 14px;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 900px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 6px 8px;
+      text-align: center;
+    }
+
+    th {
+      background: #eee;
+    }
+
+    .winner {
+      font-weight: bold;
+      background: #d0ffd0;
+    }
+
+    .dot {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+
+    /* New styles for Seat Projection */
+    .seat-projection-container {
+      width: 100%;
+      max-width: 900px;
+      background-color: #e0e0e0;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      margin-top: 30px;
+      margin-bottom: 30px;
+      box-sizing: border-box;
+    }
+
+    .seat-projection-title {
+        font-size: 1.8em;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .seat-projection-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .projection-party-card {
+      width: 140px;
+      height: 120px;
+      border-radius: 12px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      text-align: center;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .projection-party-name {
+      font-size: 1.1em;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+
+    .projection-seats {
+      font-size: 2.5em;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+
+    .projection-percentage {
+        font-size: 0.9em;
+        color: rgba(255, 255, 255, 0.9);
+        margin-top: -3px;
+    }
+
+    .projection-change {
+        font-size: 0.9em;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* 막대 그래프 스타일 */
+    .seat-bar-container {
+        width: 100%;
+        height: 25px;
+        background-color: #ccc;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 25px;
+        display: flex;
+    }
+
+    .seat-bar-segment {
+        height: 100%;
+    }
+
+    /* Individual Constituency Results 섹션 */
+    .constituency-results {
+        width: 100%;
+        max-width: 900px;
+        background-color: #e0e0e0;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        margin-top: 30px;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    .constituency-results h3 {
+        margin-top: 0;
+    }
+
+    .constituency-select-container {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    /* 드롭다운에도 단조 폰트 적용 */
+    .constituency-select-container select {
+        font-family: 'Danjo-bold-Regular', sans-serif; /* 폰트 적용 */
+        width: 80%;
+        max-width: 400px;
+        padding: 8px 12px;
+        font-size: 1em;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        appearance: none;
+        background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23000000%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13.2-6.5H18.6c-5%200-9.3%201.8-12.9%205.5-3.8%203.7-5.7%208-5.7%2012.9v120.9c0%204.9%201.9%209.2%205.7%2012.9%203.6%203.7%207.9%205.5%2012.9%205.5h255.2c5%200%209.3-1.8%2012.9-5.5%203.8-3.7%205.7-8%205.7-12.9V82.3c0-4.9-1.9-9.2-5.7-12.9z%22%2F%3E%3C%2Fsvg%3E');
+        background-repeat: no-repeat;
+        background-position: right 8px center;
+        background-size: 12px;
+        cursor: pointer;
+    }
+
+    .constituency-detail {
+        margin-top: 15px;
+        font-size: 0.95em;
+        color: #555;
+    }
+    .constituency-detail ul {
+        list-style: none;
+        padding: 0;
+        margin: 10px 0;
+        text-align: left;
+    }
+    .constituency-detail ul li {
+        margin-bottom: 5px;
+        padding: 3px 0;
+    }
+    .constituency-detail ul li .dot {
+        vertical-align: middle;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background-image-blur"></div>
+
+  <div class="content-wrapper">
+    <h2>내가 맘대로 하고싶은 확률을 입력!</h2>
+
+    <div class="party-grid" id="partyGrid"></div>
+    <button class="calculate-button" onclick="runPrediction()">의석 및 결과 계산</button>
+
+    <div class="seat-projection-container">
+      <div class="seat-projection-title">예측 의석</div>
+      <div class="seat-projection-grid" id="seatProjectionGrid"></div>
+      <div class="seat-bar-container" id="seatBarContainer"></div>
+    </div>
+
+    <h3>📍 지역별 예측</h3>
+    <div id="districtResults"></div>
+
+    <div class="constituency-results">
+      <h3>개별 선거구 결과</h3>
+      <div class="constituency-select-container">
+        <select onchange="showConstituencyDetail(this.value)">
+          <option value="">선거구를 검색하거나 선택하세요...</option>
+          </select>
+      </div>
+      <div class="constituency-detail" id="constituencyDetail">
+        자세한 분석을 보려면 선거구를 선택하세요.
+      </div>
+    </div>
+  </div> 
+  <script>
+    const TOTAL_SEATS = 423;
+
+    const parties = [
+      { id: "spd", name: "SPD", color: "#E00000", vote: 30, regionOnly: null },
+      { id: "cvp", name: "CVP", color: "#000000", vote: 20, regionOnly: null },
+      { id: "ddp", name: "DDP", color: "#FFD700", vote: 12, regionOnly: null },
+      { id: "dnvp", name: "DNVP", color: "#007BFF", vote: 15, regionOnly: null },
+      { id: "uspd", name: "USPD", color: "#B80000", vote: 10, regionOnly: null },
+      { id: "kpd", name: "KPD", color: "#9932CC", vote: 8, regionOnly: null },
+      { id: "dvp", name: "DVP", color: "#FFBF00", vote: 6, regionOnly: null },
+      { id: "dbp", name: "DBP", color: "#32CD32", vote: 4, regionOnly: null },
+      { id: "NSDAP", name: "NSDAP", color: "#964B00", vote: 4, regionOnly: null },
+      { id: "dhp", name: "DHP", color: "#228B22", vote: 2, regionOnly: "hanover" },
+      { id: "bb", name: "BB", color: "#2e7d32", vote: 5, regionOnly: "bavaria" }
+    ];
+
+const districts = [
+  { id: 1, name: "동프로이센", seats: 14 },
+  { id: 2, name: "서프로이센", seats: 11 },
+  { id: 3, name: "베를린", seats: 14 },
+  { id: 4, name: "포츠담 I", seats: 10 },
+  { id: 5, name: "포츠담 II", seats: 9 },
+  { id: 6, name: "프랑크푸르트 안 데어 오더", seats: 8 },
+  { id: 7, name: "포메라니아", seats: 11 },
+  { id: 8, name: "포젠", seats: 14 },
+  { id: 9, name: "브레슬라우", seats: 12 },
+  { id:10, name: "오펠른", seats: 15 },
+  { id:11, name: "리그니츠", seats: 8 },
+  { id:12, name: "마그데부르크", seats: 11 },
+  { id:13, name: "메르제부르크", seats: 9 },
+  { id:14, name: "튀링겐", seats: 14 },
+  { id:15, name: "작센", seats: 13 },
+  { id:16, name: "하노버 (hanover)", seats: 16 },
+  { id:17, name: "베스트팔렌 북부", seats: 13 },
+  { id:18, name: "베스트팔렌 남부", seats: 16 },
+  { id:19, name: "헤세-나사우", seats: 17 },
+  { id:20, name: "쾰른-아헨", seats: 13 },
+  { id:21, name: "코블렌츠-트리어", seats: 12 },
+  { id:22, name: "팔츠 (bavaria)", seats: 6 },
+  { id:23, name: "헤세-다름슈타트", seats: 9 },
+  { id:24, name: "상부 바이에른 - 슈바벤 (bavaria)", seats: 15 },
+  { id:25, name: "하부 바이에른 - 상부 팔츠 (bavaria)", seats: 9 },
+  { id:26, name: "프랑켄 (bavaria)", seats: 15 },
+  { id:27, name: "드레스덴 - 바우첸", seats: 12 },
+  { id:28, name: "라이프치히", seats: 9 },
+  { id:29, name: "켐니츠 - 츠비카우", seats: 12 },
+  { id:30, name: "뷔르템베르크 (남부)", seats: 14 },
+  { id:31, name: "뷔르템베르크 (슈투트가르트)", seats: 5 },
+  { id:32, name: "바덴", seats: 14 },
+  { id:33, name: "함부르크-브레멘-슈타데", seats: 12 },
+  { id:34, name: "메클렌부르크", seats: 6 },
+  { id:35, name: "슐레스비히-홀슈타인", seats: 11 },
+  { id:36, name: "오스나브뤼크-올덴부르크", seats: 7 }
+ ];
+
+    // 구역 드롭다운 채우기
+    function populateConstituencyDropdown() {
+        const select = document.querySelector('.constituency-select-container select');
+        districts.forEach(district => {
+            const option = document.createElement('option');
+            option.value = district.id;
+            option.textContent = district.name;
+            select.appendChild(option);
+        });
+    }
+
+    // 구역 상세 정보 표시: 정당별 득표율을 표시하도록 수정
+    function showConstituencyDetail(districtId) {
+        const detailDiv = document.getElementById('constituencyDetail');
+        if (districtId === "") {
+            detailDiv.innerHTML = "자세한 분석을 보려면 선거구를 선택하세요.";
+            return;
+        }
+
+        const selectedDistrict = districts.find(d => d.id == districtId);
+        if (!selectedDistrict) {
+            detailDiv.innerHTML = "선거구를 찾을 수 없습니다.";
+            return;
+        }
+
+        let rawVotes = {}, totalDistrictVotes = 0;
+
+        parties.forEach(p => {
+          let shouldInclude = true;
+          if (p.regionOnly) {
+            const districtNameLower = selectedDistrict.name.toLowerCase();
+            if (p.regionOnly === "bavaria" && 
+                !(districtNameLower.includes("bavaria") || 
+                  districtNameLower.includes("franconia") || 
+                  districtNameLower.includes("palatinate"))) {
+              shouldInclude = false;
+            } 
+            else if (p.regionOnly === "hanover" && !districtNameLower.includes("hanover")) {
+              shouldInclude = false;
+            }
+          }
+
+          if (shouldInclude) {
+            const partyObj = parties.find(party => party.id === p.id);
+            const noise = (Math.random() * 10 - 5);
+            const raw = Math.max(0, partyObj.vote + noise);
+            rawVotes[p.id] = raw;
+            totalDistrictVotes += raw;
+          }
+        });
+
+        let normalized = {};
+        for (let pid in rawVotes) {
+          normalized[pid] = (rawVotes[pid] / totalDistrictVotes) * 100;
+        }
+
+        let detailHtml = `<h4>${selectedDistrict.name} (${selectedDistrict.seats} 의석)</h4>`;
+        detailHtml += `<ul>`;
+
+        const sortedDistrictParties = Object.keys(normalized).map(pid => {
+            return {
+                party: parties.find(p => p.id === pid),
+                percentage: normalized[pid]
+            };
+        }).sort((a, b) => b.percentage - a.percentage);
+
+        sortedDistrictParties.forEach(({ party, percentage }) => {
+            detailHtml += `<li><span class="dot" style="background:${party.color}"></span> ${party.name}: ${percentage.toFixed(1)}%</li>`;
+        });
+        detailHtml += `</ul>`;
+
+        detailDiv.innerHTML = detailHtml;
+    }
+
+    function renderPartyCards() {
+      const grid = document.getElementById("partyGrid");
+      grid.innerHTML = "";
+      parties.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "party-card";
+        card.style.backgroundColor = p.color;
+        card.innerHTML = `
+          <div>${p.name}</div>
+          <input type="number" value="${p.vote}" onchange="updateVote('${p.id}', this.value)" 
+                 style="background-color: ${p.color}; color: rgba(255, 255, 255, 0.75);">
+          <small>${p.regionOnly ? p.regionOnly.charAt(0).toUpperCase() + p.regionOnly.slice(1) : '전국'}</small>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function updateVote(id, value) {
+      const party = parties.find(p => p.id === id);
+      party.vote = parseFloat(value) || 0;
+    }
+
+    function allocateSeats(partyPercents, seats) {
+      let scores = [];
+      for (let [id, percent] of Object.entries(partyPercents)) {
+        for (let i = 0; i < seats; i++) {
+          scores.push({ id, score: percent / (2 * i + 1) });
+        }
+      }
+      scores.sort((a, b) => b.score - a.score);
+      let result = {};
+      scores.slice(0, seats).forEach(s => {
+        result[s.id] = (result[s.id] || 0) + 1;
+      });
+      return result;
+    }
+
+    function runPrediction() {
+      const districtResults = document.getElementById('districtResults');
+      const seatProjectionGrid = document.getElementById('seatProjectionGrid');
+      const seatBarContainer = document.getElementById('seatBarContainer');
+
+      let nationalSeats = {};
+      let nationalTotalVotes = 0;
+      let partyNationalVotes = {};
+
+      districtResults.innerHTML = "";
+      seatProjectionGrid.innerHTML = "";
+      seatBarContainer.innerHTML = "";
+
+      const table = document.createElement("table");
+      const header = `<tr>
+        <th>구역</th>
+        ${parties.map(p => `<th>${p.name}</th>`).join("")}
+        <th>승자</th>
+      </tr>`;
+      table.innerHTML = header;
+
+      districts.forEach(district => {
+        let rawVotes = {}, totalDistrictVotes = 0;
+
+        parties.forEach(p => {
+          let shouldInclude = true;
+          if (p.regionOnly) {
+            const districtNameLower = district.name.toLowerCase();
+            if (p.regionOnly === "bavaria" && 
+                !(districtNameLower.includes("bavaria") || 
+                  districtNameLower.includes("franconia") || 
+                  districtNameLower.includes("palatinate"))) {
+              shouldInclude = false;
+            } 
+            else if (p.regionOnly === "hanover" && !districtNameLower.includes("hanover")) {
+              shouldInclude = false;
+            }
+          }
+
+          if (shouldInclude) {
+            const noise = (Math.random() * 10 - 5);
+            const raw = Math.max(0, p.vote + noise);
+            rawVotes[p.id] = raw;
+            totalDistrictVotes += raw;
+          }
+        });
+
+        for (let pid in rawVotes) {
+            partyNationalVotes[pid] = (partyNationalVotes[pid] || 0) + rawVotes[pid];
+        }
+        nationalTotalVotes += totalDistrictVotes;
+
+        let normalized = {};
+        let max = -1, winner = null;
+
+        for (let pid in rawVotes) {
+          const percent = (rawVotes[pid] / totalDistrictVotes) * 100;
+          normalized[pid] = percent;
+          if (percent > max) {
+            max = percent;
+            winner = parties.find(p => p.id === pid);
+          }
+        }
+
+        const seatMap = allocateSeats(normalized, district.seats);
+        Object.entries(seatMap).forEach(([id, count]) => {
+          nationalSeats[id] = (nationalSeats[id] || 0) + count;
+        });
+
+        const row = document.createElement("tr");
+        row.innerHTML = `<td>${district.name}</td>`;
+        parties.forEach(p => {
+          if (normalized[p.id]) {
+            row.innerHTML += `<td>${normalized[p.id].toFixed(1)}%<br><b>${seatMap[p.id] || 0}</b></td>`;
+          } else {
+            row.innerHTML += `<td>-</td>`;
+          }
+        });
+
+        if (winner) {
+            row.innerHTML += `<td class="winner"><span class="dot" style="background:${winner.color}"></span>${winner.name}</td>`;
+        } else {
+            row.innerHTML += `<td class="winner">-</td>`;
+        }
+        table.appendChild(row);
+      });
+
+      districtResults.appendChild(table);
+
+      const totalCalculatedSeats = Object.values(nationalSeats).reduce((sum, seats) => sum + seats, 0);
+
+      const sortedParties = Object.keys(nationalSeats).map(id => {
+          const nationalPercentage = (partyNationalVotes[id] / nationalTotalVotes) * 100;
+          return {
+              party: parties.find(p => p.id === id),
+              seats: nationalSeats[id],
+              percentage: nationalPercentage.toFixed(1) + '%'
+          };
+      }).sort((a, b) => b.seats - a.seats);
+
+      sortedParties.forEach(({ party, seats, percentage }) => {
+          const partyCard = document.createElement("div");
+          partyCard.className = "projection-party-card";
+          partyCard.style.backgroundColor = party.color;
+          
+          partyCard.innerHTML = `
+              <div class="projection-party-name">${party.name}</div>
+              <div class="projection-seats">${seats}</div>
+              <div class="projection-percentage">${percentage}</div>
+              <div class="projection-change"></div>
+          `;
+          seatProjectionGrid.appendChild(partyCard);
+      });
+
+      sortedParties.forEach(({ party, seats }) => {
+          const segment = document.createElement('div');
+          segment.className = 'seat-bar-segment';
+          segment.style.backgroundColor = party.color;
+          segment.style.width = `${(seats / totalCalculatedSeats) * 100}%`;
+          seatBarContainer.appendChild(segment);
+      });
+      
+      const select = document.querySelector('.constituency-select-container select');
+      select.value = "";
+      document.getElementById('constituencyDetail').innerHTML = "자세한 분석을 보려면 선거구를 선택하세요.";
+    }
+
+    // 페이지 로드 시 실행
+    renderPartyCards();
+    populateConstituencyDropdown();
+  </script>
+
+</body>
+</html>
